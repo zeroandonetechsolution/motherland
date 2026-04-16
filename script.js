@@ -120,3 +120,31 @@ if (document.getElementById('bookingsTableBody')) {
         document.getElementById('totalRevenue').innerText = '₹' + (bookings.length * 1500).toLocaleString();
     }
 }
+
+// Mobile Menu Toggle
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenuToggle.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+            mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+        });
+    });
+}
+

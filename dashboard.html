@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Motherland Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body style="background: #f4f7f6;">
 
@@ -19,9 +21,14 @@
                     </svg>
                     <h1 style="color: var(--primary); margin-left: 10px;">ADMIN PORTAL</h1>
                 </div>
-                <div class="nav-links">
-                    <a href="index.html">View Site</a>
-                    <a href="#" onclick="logout()">Logout</a>
+                <div class="nav-btns">
+                    <div class="nav-links">
+                        <a href="index.html">View Site</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </nav>
         </div>
