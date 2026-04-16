@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Form | Motherland Kindergarten</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="display: flex; justify-content: center;">
+            <a href="index.html" class="logo">
+                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="48" stroke="#8e1b1b" stroke-width="4"/>
+                    <path d="M30 70V30L50 50L70 30V70" stroke="#f0c325" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="logo-text" style="text-align: center;">
+                    <h1>MOTHERLAND</h1>
+                    <p>Stride Towards Excellence</p>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <div class="admission-hero">
+        <div class="container">
+            <h1>Admission Application</h1>
+            <p>Please complete all steps to register your child for the 2026-27 academic year.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="step-indicator">
+                <div class="step active" id="step1-indicator">1</div>
+                <div class="step" id="step2-indicator">2</div>
+                <div class="step" id="step3-indicator">3</div>
+            </div>
+
+            <form id="admissionForm">
+                <!-- Step 1: Child Information -->
+                <div class="form-step active" id="step1">
+                    <h3 style="margin-bottom: 2rem; color: var(--primary);">Child Information</h3>
+                    <div class="form-group">
+                        <label>Child's Full Name</label>
+                        <input type="text" id="childName" required placeholder="Enter child's full name">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" id="dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Applying For</label>
+                        <select id="grade" required>
+                            <option value="">Select Grade</option>
+                            <option value="PRE-KG">PRE-KG</option>
+                            <option value="LKG">LKG</option>
+                            <option value="UKG">UKG</option>
+                        </select>
+                    </div>
+                    <div class="form-btns">
+                        <span></span>
+                        <button type="button" class="btn-primary" onclick="nextStep(2)">Next: Parent Details</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Parent Information -->
+                <div class="form-step" id="step2">
+                    <h3 style="margin-bottom: 2rem; color: var(--primary);">Parent / Guardian Information</h3>
+                    <div class="form-group">
+                        <label>Parent/Guardian Name</label>
+                        <input type="text" id="parentName" required placeholder="Enter parent's full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="parentPhone" required placeholder="Enter 10-digit mobile number">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="parentEmail" required placeholder="Enter email address">
+                    </div>
+                    <div class="form-group">
+                        <label>Residential Address</label>
+                        <textarea id="address" rows="3" required placeholder="Enter your full address"></textarea>
+                    </div>
+                    <div class="form-btns">
+                        <button type="button" class="btn-secondary" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="btn-primary" onclick="nextStep(3)">Next: Payment</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Payment & Summary -->
+                <div class="form-step" id="step3">
+                    <h3 style="margin-bottom: 2rem; color: var(--primary);">Review & Payment</h3>
+                    <div id="summaryArea" style="background: #f9f9f9; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <!-- Summary will be injected by JS -->
+                    </div>
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <p style="font-weight: 600;">Registration Fee: <span style="font-size: 1.5rem; color: var(--primary);">₹1,500</span></p>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Non-refundable one-time processing fee.</p>
+                    </div>
+                    <div class="form-btns">
+                        <button type="button" class="btn-secondary" onclick="prevStep(2)">Back</button>
+                        <button type="submit" class="btn-primary" style="background: #28a745; border-color: #28a745;">Proceed to Payment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

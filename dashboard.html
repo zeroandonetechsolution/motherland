@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Motherland Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: #f4f7f6;">
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" stroke="#8e1b1b" stroke-width="4"/>
+                        <path d="M30 70V30L50 50L70 30V70" stroke="#f0c325" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h1 style="color: var(--primary); margin-left: 10px;">ADMIN PORTAL</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">View Site</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="container">
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <h3>Total Enrollments</h3>
+                    <p id="totalEnrollments">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Revenue Collected</h3>
+                    <p id="totalRevenue">₹0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Documents</h3>
+                    <p>8</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Classes Active</h3>
+                    <p>3</p>
+                </div>
+            </div>
+
+            <h2 style="margin-bottom: 2rem;">Recent Admission Bookings</h2>
+            <div style="overflow-x: auto;">
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Child Name</th>
+                            <th>Grade</th>
+                            <th>Parent Name</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <!-- Data injected by script.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Simple Auth Simulation
+        if (!sessionStorage.getItem('admin_logged_in')) {
+            const pass = prompt('Enter Admin Password (Hint: admin):');
+            if (pass === 'admin') {
+                sessionStorage.setItem('admin_logged_in', 'true');
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('admin_logged_in');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

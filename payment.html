@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment | Motherland Kindergarten</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .payment-card {
+            max-width: 500px;
+            margin: 4rem auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .method-btn {
+            border: 2px solid #eee;
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .method-btn.active {
+            border-color: var(--primary);
+            background: #fff5f5;
+        }
+        .processing-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .spinner {
+            width: 50px; height: 50px;
+            border: 5px solid #eee;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body style="background: #f0f2f5;">
+
+    <div class="payment-card">
+        <h2 style="color: var(--primary);">Secure Checkout</h2>
+        <p style="color: var(--text-light);">Registration for: <strong id="childLabel">Loading...</strong></p>
+        
+        <div style="font-size: 2.5rem; font-weight: 800; margin: 2rem 0;">₹1,500.00</div>
+
+        <div class="payment-methods">
+            <div class="method-btn active">
+                <i class="fas fa-credit-card"></i> Card
+            </div>
+            <div class="method-btn">
+                <i class="fas fa-mobile-alt"></i> UPI
+            </div>
+        </div>
+
+        <div id="cardSection">
+            <div class="form-group" style="text-align: left;">
+                <label>Card Number</label>
+                <input type="text" value="4242 4242 4242 4242" disabled>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group" style="text-align: left;">
+                    <label>Expiry</label>
+                    <input type="text" value="12/28" disabled>
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label>CVV</label>
+                    <input type="text" value="***" disabled>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-primary" style="width: 100%; padding: 1.2rem; background: #000;" onclick="startPayment()">Pay Now</button>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #999;"><i class="fas fa-lock"></i> Protected by AES-256 Encryption</p>
+    </div>
+
+    <div class="processing-overlay" id="overlay">
+        <div class="spinner"></div>
+        <h3>Processing Payment...</h3>
+        <p>Please do not close this window.</p>
+    </div>
+
+    <script>
+        const temp = JSON.parse(localStorage.getItem('temp_booking'));
+        if (!temp) {
+            window.location.href = 'index.html';
+        } else {
+            document.getElementById('childLabel').innerText = temp.childName;
+        }
+
+        function startPayment() {
+            const overlay = document.getElementById('overlay');
+            overlay.style.display = 'flex';
+
+            setTimeout(() => {
+                // Success!
+                const bookings = JSON.parse(localStorage.getItem('motherland_bookings')) || [];
+                temp.status = 'Paid';
+                bookings.push(temp);
+                localStorage.setItem('motherland_bookings', JSON.stringify(bookings));
+                localStorage.removeItem('temp_booking');
+
+                overlay.innerHTML = `
+                    <div style="text-align: center;">
+                        <i class="fas fa-check-circle" style="font-size: 5rem; color: #28a745; margin-bottom: 1.5rem;"></i>
+                        <h2 style="margin-bottom: 1rem;">Payment Successful!</h2>
+                        <p>Admission registered for ${temp.childName}.</p>
+                        <p>You will receive a confirmation call shortly.</p>
+                        <button class="btn-primary" style="margin-top: 2rem;" onclick="window.location.href='index.html'">Back to Home</button>
+                    </div>
+                `;
+            }, 3000);
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html>
